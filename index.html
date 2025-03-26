@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .form-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .error {
+            color: red;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Login</h2>
+    <form id="loginForm">
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <div id="emailError" class="error"></div>
+        </div>
+        <div>
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" required></textarea>
+            <div id="messageError" class="error"></div>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<script>
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        document.getElementById('emailError').textContent = '';
+        document.getElementById('messageError').textContent = '';
+        const email = document.getElementById('email').value;
+        const message = document.getElementById('message').value;
+        let isValid = true;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            document.getElementById('emailError').textContent = 'Please enter a valid email address.';
+            isValid = false;
+        }
+        if (message.trim() === '') {
+            document.getElementById('messageError').textContent = 'Message cannot be empty.';
+            isValid = false;
+        }
+        if (isValid) {
+            alert('Form submitted successfully!');
+    document.getElementById('loginForm').reset();
+        }
+    });
+</script>
+
+</body>
+</html>
